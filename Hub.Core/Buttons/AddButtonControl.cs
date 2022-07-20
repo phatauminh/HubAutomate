@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 
 namespace Hub.Retailer.Common.Pages.Ultilities.Controls
 {
-    public class AddButtonControl : BaseControl
+    public class AddButtonControl 
     {
-        public AddButtonControl(IPageDecorator page) : base(page)
+        private readonly IPageDecorator _page;
+        public AddButtonControl(IPageDecorator page) 
         {
+            _page = page;
         }
 
         private string AddButton => "text='Add'";

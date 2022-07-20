@@ -1,4 +1,5 @@
 ﻿using Hub.Core.Decorators;
+using Hub.Retailer.Common.Pages.Ultilities.Controls;
 using System.Threading.Tasks;
 
 namespace Hub.Retailer.Common.Pages.Activities
@@ -20,7 +21,8 @@ namespace Hub.Retailer.Common.Pages.Activities
 
         public async Task GoToActivity(string level1, string level2)
         {
-            await ButtonControls.AddButtonControl.GoToActivity(level1, level2);
+            var controls = new AddButtonControl(_page);
+            await controls.GoToActivity(level1, level2);
         }
     }
 }

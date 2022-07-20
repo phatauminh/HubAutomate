@@ -1,12 +1,15 @@
 ﻿using Hub.Core.Controls;
 using Hub.Core.Decorators;
 using Hub.Core.Ultilities;
+using Hub.Retailer.Common.Pages.Ultilities.Controls;
+using System.Threading.Tasks;
 
 namespace Hub.Retailer.Common.Pages.Ultilities.Popups
 {
     public abstract class BasePopup
     {
         protected readonly IPageDecorator _page;
+
         public BasePopup(IPageDecorator page)
         {
             _page = page;
@@ -26,5 +29,13 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Popups
             var frame = _page.FrameLocator(FrameSelector).Locator("body");
             return ElementFinder.FindSelectListByLabel(frame, label);
         }
+
+        protected async Task ClickNext()
+        {
+            var frame = _page.FrameLocator(FrameSelector).Locator("body");
+            var controls = new NextButtonControl(frame);
+            await controls.GoNext();
+        }
+        
     }
 }

@@ -136,7 +136,9 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Popups
        
         public override string Title => "Energy Offer - Customer Find / New";
 
-        public TextBox CustomerNameTexBox => GetTextBoxByLabel(LblCustomerName);
+        public TextBox CustomerNameTextBox => GetTextBoxByLabel(LblCustomerName);
+        public TextBox OfferDocumentNumberTextBox => GetTextBoxByLabel(LblOfferDocumentNumber);
+        public TextBox TrackingNumberTextBox => GetTextBoxByLabel(LblTrackingNumber);
 
         public SelectList FunctionGroupSelectList => GetSelectListByLabel(LblFunctionGroup);
 
@@ -147,13 +149,21 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Popups
         public async Task Create(EnergyOffer model)
         {
             await InputCustomerFindNew(model);
+            await ClickNext();
+            await InputDocumentSupplyAddress(model);
+            await ClickNext();
         }
 
 
-        public async Task InputCustomerFindNew(EnergyOffer model)
+        private async Task InputCustomerFindNew(EnergyOffer model)
         {
-            await CustomerNameTexBox.SetText("Abcd");
-            await FunctionGroupSelectList.Select("Activation Call");
+            await FunctionGroupSelectList.Select(model.FunctionGroup);
+        }
+
+        private async Task InputDocumentSupplyAddress(EnergyOffer model)
+        {
+            await OfferDocumentNumberTextBox.SetText(model.OfferDocumentNumber);
+            await TrackingNumberTextBox.SetText(model.TrackingNumber);
         }
     }
 }

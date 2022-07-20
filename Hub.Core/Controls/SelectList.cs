@@ -1,35 +1,27 @@
 ﻿using Microsoft.Playwright;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hub.Core.Controls
 {
     public class SelectList
     {
-        private readonly ILocator _locator;
-        public SelectList(ILocator locator)
+        #region Seletors
+        private readonly string DropdownCornerIconSelector = "//select//parent::div//following-sibling::div";
+        private readonly string ListItemSelector = "//div[@class='ui-selectonemenu-items-wrapper']//ul/li";
+        #endregion
+
+        private readonly ILocator _selectLocator;
+        private readonly ILocator _baseLocator;
+        public SelectList(ILocator baseLocator, ILocator selectLocator)
         {
-            _locator = locator;
+            _selectLocator = selectLocator;
+            _baseLocator = baseLocator;
         }
 
-        public async Task Select(string item, bool matchExactly = true)
+        public async Task Select(string item)
         {
-            await _locator.Locator("//parent::div").Locator("//following-sibling::div").ClickAsync();
-
-            var element = _locator.Locator("//div[@class='ui-selectonemenu-items-wrapper']");
-            element = element.Locator("//ul/li");
-        }
-
-        public async Task<string> GetItem(string item, bool matchExactly = true)
-        {
-            //TODO
-            return "";
-        }
-
-        public async Task<List<string>> GetItems(string item, bool matchExactly = true)
-        {
-            //TODO
-            return new List<string> { };
+            await _selectLocator.Locator(DropdownCornerIconSelector).ClickAsync();
+            await _baseLocator.Locator(ListItemSelector).Locator($"text = {item}").ClickAsync();
         }
     }
 }

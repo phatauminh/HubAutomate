@@ -1,4 +1,4 @@
-﻿using Hub.Core.Ultilities;
+﻿using Hub.Retailer.Common.Models.Activities;
 using Hub.Retailer.Common.Pages.Activities;
 using Hub.Retailer.Common.Pages.Login;
 using Hub.Retailer.Common.Pages.Ultilities.Popups;
@@ -11,9 +11,8 @@ namespace Hub.Retailer.Tests.Tests.CI.CatsWigs
     public class HRP_2194_New_NMI_Classifications : InitializeHooks
     {
         [Test]
-        public async Task Verify_Login_Success()
+        public async Task RES_Basic_Meter_Create_And_Complete_EO_Then_Verify_New_NMI_Classification_Value_Is_Added()
         {
-
             var page = new LoginPage(Page);
             await page.LoginUserPortal();
 
@@ -22,9 +21,15 @@ namespace Hub.Retailer.Tests.Tests.CI.CatsWigs
             await page2.GoToActivity("Energy Offer", "Energy Offer");
 
             var popup = new EnergyOfferPopup(Page);
-            await popup.InputCustomerFindNew(null);
 
+            var energyOffer = new EnergyOffer
+            {
+                FunctionGroup = "Inbound Telesales - In-Situ",
+                OfferDocumentNumber = "TR",
+                TrackingNumber = "TR_TEST"
+            };
 
+            await popup.Create(energyOffer);
         }
     }
 }
