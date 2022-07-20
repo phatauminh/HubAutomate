@@ -9,7 +9,8 @@ namespace Hub.Retailer.Common.Configurations
 
         public static string GetUserPortalUrl => Configuration.ServerSettings.UPUrl;
 
-        public static Credentials GetCredentials => Configuration.Credentials;
+        public static Credentials Credentials => Configuration.Credentials;
+        public static DatabaseSettings DatabaseSettings => Configuration.DatabaseSettings;
 
     }
 }

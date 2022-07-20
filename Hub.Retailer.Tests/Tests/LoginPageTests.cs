@@ -1,6 +1,8 @@
 ﻿using Hub.Retailer.Common.Pages.Login;
 using Hub.Retailer.Tests.Hooks;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hub.Retailer.Tests.Tests

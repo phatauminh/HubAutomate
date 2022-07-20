@@ -35,7 +35,7 @@ namespace Hub.Retailer.Common.Pages.Login
         public async Task LoginUserPortal()
         {
             await GoToPage();
-            var credentials = RetailerConfiguration.GetCredentials;
+            var credentials = RetailerConfiguration.Credentials;
 
             if (await IsSSO())
                 await SSOLogin(credentials.SSOCredential.Username, credentials.SSOCredential.Password, staySignIn: false);

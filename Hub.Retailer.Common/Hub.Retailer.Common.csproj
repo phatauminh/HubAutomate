@@ -5,14 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hub.Core\Hub.Core.csproj" />
+    <Compile Remove="Exceptions\**" />
+    <Compile Remove="Factories\**" />
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="Pages\CustomerProspectSearch\**" />
+    <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="Factories\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Pages\CustomerProspectSearch\**" />
+    <None Remove="Exceptions\**" />
+    <None Remove="Factories\**" />
+    <None Remove="Interfaces\**" />
+    <None Remove="Pages\CustomerProspectSearch\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
-    <Folder Include="Factories\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Pages\CustomerProspectSearch\" />
+    <ProjectReference Include="..\Hub.Core\Hub.Core.csproj" />
   </ItemGroup>
 
 </Project>

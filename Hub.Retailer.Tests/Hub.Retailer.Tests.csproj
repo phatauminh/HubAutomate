@@ -9,6 +9,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Hub.Core\Hub.Core.csproj" />
 		<ProjectReference Include="..\Hub.Retailer.Common\Hub.Retailer.Common.csproj" />
+		<ProjectReference Include="..\Hub.Retailer.Data\Hub.Retailer.Data.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
