@@ -1,11 +1,5 @@
-﻿using System;
-using Hub.Retailer.Common.Configurations;
+﻿using Hub.Retailer.Common.Configurations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
 
 namespace Hub.Retailer.Data.Entities
 {
@@ -20,9 +14,9 @@ namespace Hub.Retailer.Data.Entities
         {
         }
 
-        public virtual DbSet<EventException> Eventexception { get; set; }
-        public virtual DbSet<EventExceptionDetail> Eventexceptiondetail { get; set; }
-        public virtual DbSet<EventStore> Eventstore { get; set; }
+        public virtual DbSet<EventException> EventException { get; set; }
+        public virtual DbSet<EventExceptionDetail> EventExceptionDetail { get; set; }
+        public virtual DbSet<EventStore> EventStore { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

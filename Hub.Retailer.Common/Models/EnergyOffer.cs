@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Hub.Retailer.Common.Models.Activities
+﻿namespace Hub.Retailer.Common.Models.Activities
 {
     public class EnergyOffer
     {
@@ -15,7 +11,5 @@ namespace Hub.Retailer.Common.Models.Activities
         public string NMI { get; set; }
         public string MIRN { get; set; }
         public string ServiceAddress { get; set; }
-
-
     }
 }

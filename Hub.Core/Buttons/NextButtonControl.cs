@@ -1,19 +1,17 @@
 ﻿using Microsoft.Playwright;
 using System.Threading.Tasks;
 
-namespace Hub.Retailer.Common.Pages.Ultilities.Controls
+namespace Hub.Core.Buttons
 {
-    public class NextButtonControl 
+    public class NextButtonControl : BaseButton
     {
-        private readonly ILocator _locator;
-        public NextButtonControl(ILocator locator)
+        public NextButtonControl(ILocator locator) : base(locator)
         {
-            _locator = locator;
         }
 
         private string NextButton => "text=Next";
 
-        public async Task GoNext()
+        public async Task Execute()
         {
             await _locator.Locator(NextButton).ClickAsync();
         }

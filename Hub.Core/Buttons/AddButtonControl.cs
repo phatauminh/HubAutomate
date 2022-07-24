@@ -1,12 +1,12 @@
 ﻿using Hub.Core.Decorators;
 using System.Threading.Tasks;
 
-namespace Hub.Retailer.Common.Pages.Ultilities.Controls
+namespace Hub.Core.Buttons
 {
-    public class AddButtonControl 
+    public class AddButtonControl
     {
         private readonly IPageDecorator _page;
-        public AddButtonControl(IPageDecorator page) 
+        public AddButtonControl(IPageDecorator page)
         {
             _page = page;
         }

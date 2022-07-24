@@ -1,7 +1,7 @@
-﻿using Hub.Core.Controls;
+﻿using Hub.Core.Buttons;
+using Hub.Core.Controls;
 using Hub.Core.Decorators;
 using Hub.Core.Ultilities;
-using Hub.Retailer.Common.Pages.Ultilities.Controls;
 using System.Threading.Tasks;
 
 namespace Hub.Retailer.Common.Pages.Ultilities.Popups
@@ -34,7 +34,7 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Popups
         {
             var frame = _page.FrameLocator(FrameSelector).Locator("body");
             var controls = new NextButtonControl(frame);
-            await controls.GoNext();
+            await controls.Execute();
         }
         
     }

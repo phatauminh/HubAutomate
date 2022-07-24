@@ -2,19 +2,18 @@
 using Hub.Core.Models;
 using Hub.Core.Services;
 using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
 using System;
 using System.Threading.Tasks;
 
 namespace Hub.Core.Drivers
 {
-    public class PlaywrightDriver : PageTest
+    public class PlaywrightDriver 
     {
         private static readonly BaseSettings Configuration = ConfigurationService.GetBaseSettings();
 
-        public static IPageDecorator Page { get; set; }
+        public IPageDecorator Page { get; set; }
 
-        public static IBrowserContext BrowserContext { get; set; }
+        public IBrowserContext BrowserContext { get; set; }
 
         protected bool IsScreenshotToggleOn => Configuration.PlaywrightSettings.ScreenshotSettings.IsToggleOn;
 
@@ -38,15 +37,17 @@ namespace Hub.Core.Drivers
             SlowMo = Configuration.PlaywrightSettings.SlowMo
         };
 
-        public async Task<IPageDecorator> InitalizePlaywright()
+        public async Task InitalizePlaywright()
         {
             var browserType = Configuration.BrowserType;
 
+            var playwright = await Playwright.CreateAsync();
+
             IBrowser browser = browserType.ToLower() switch
             {
-                "chrome" => await Playwright.Chromium.LaunchAsync(ChromeOptions),
-                "firefox" => await Playwright.Firefox.LaunchAsync(FirefoxOptions),
-                "safari" => await Playwright.Firefox.LaunchAsync(FirefoxOptions),
+                "chrome" => await playwright.Chromium.LaunchAsync(ChromeOptions),
+                "firefox" => await playwright.Firefox.LaunchAsync(FirefoxOptions),
+                "safari" => await playwright.Firefox.LaunchAsync(FirefoxOptions),
                 _ => throw new ArgumentException($"The parameter for 'Browser' is not correct, please provide Chrome, Firefox or Safari."),
             };
 
@@ -64,9 +65,7 @@ namespace Hub.Core.Drivers
 
             var page = await BrowserContext.NewPageAsync();
 
-            var pageDecorator = new PageDecorator(page);
-
-            return pageDecorator;
+            Page = new PageDecorator(page);
         }
     }
 

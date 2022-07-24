@@ -11,11 +11,11 @@ namespace Hub.Retailer.Common.Pages.Login
         }
 
         private const string SSO_LOGIN_TITLE = "Sign in to your account";
-        public async Task FillUserName(string userName) => await _page.FillAsync(UsernameField, userName);
-        public async Task FillPassword(string password) => await _page.FillAsync(PasswordField, password);
-        public async Task ClickSignInButton() => await _page.ClickAsync(SignInButton);
-        public async Task ClickNextButton() => await _page.ClickAsync(NextButton);
-        public async Task ClickStaySignInButton(bool staySignIn) => await _page.ClickAsync(StaySignInButton(staySignIn));
+        private async Task FillUserName(string userName) => await _page.FillAsync(UsernameField, userName);
+        private async Task FillPassword(string password) => await _page.FillAsync(PasswordField, password);
+        private async Task ClickSignInButton() => await _page.ClickAsync(SignInButton);
+        private async Task ClickNextButton() => await _page.ClickAsync(NextButton);
+        private async Task ClickStaySignInButton(bool staySignIn) => await _page.ClickAsync(StaySignInButton(staySignIn));
 
         private async Task SSOLogin(string username, string password, bool staySignIn)
         {
