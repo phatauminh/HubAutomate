@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Hub.Retailer.Specs.Features
+namespace Hub.Retailer.Specs.Features.CatsAndWigs
 {
     using TechTalk.SpecFlow;
     using System;
@@ -28,14 +28,14 @@ namespace Hub.Retailer.Specs.Features
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Calculator.feature"
+#line 1 "UICheck.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Energy Offer", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/CatsAndWigs", "Energy Offer", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,14 +74,16 @@ namespace Hub.Retailer.Specs.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create New Energy Offer")]
+        [NUnit.Framework.DescriptionAttribute("HRP-2194 Create and complete Energy Offer then verify new NMI classifications val" +
+            "ue are added")]
         [NUnit.Framework.CategoryAttribute("EnergyOffer")]
-        public virtual void CreateNewEnergyOffer()
+        public virtual void HRP_2194CreateAndCompleteEnergyOfferThenVerifyNewNMIClassificationsValueAreAdded()
         {
             string[] tagsOfScenario = new string[] {
                     "EnergyOffer"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create New Energy Offer", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("HRP-2194 Create and complete Energy Offer then verify new NMI classifications val" +
+                    "ue are added", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

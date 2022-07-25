@@ -1,7 +1,7 @@
 ﻿Feature: Energy Offer
 
 @EnergyOffer
-Scenario: Create New Energy Offer
+Scenario: HRP-2194 Create and complete Energy Offer then verify new NMI classifications value are added
 	Given I login to user portal
 	And I prepare energy offer data
 		| Key                 | Value                       |

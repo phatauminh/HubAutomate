@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Hub.Core.Controls
 {
-    public class TextBox
+    public class TextBox : BaseControl
     {
         private readonly ILocator _locator;
         public TextBox(ILocator locator)
@@ -11,8 +11,14 @@ namespace Hub.Core.Controls
             _locator = locator;
         }
 
-        public async Task SetText(string value) => await _locator.FillAsync(value);
+        public override async Task SetValue(string value)
+        {
+            await _locator.FillAsync(value);
+        }
 
-        public async Task<string> GetText() => await _locator.InputValueAsync();
+        public override async Task<string> GetValue()
+        {
+            return await _locator.InputValueAsync();
+        }
     }
 }

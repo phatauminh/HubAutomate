@@ -10,6 +10,6 @@
         public string TrackingNumber { get; set; }
         public string NMI { get; set; }
         public string MIRN { get; set; }
-        public string ServiceAddress { get; set; }
+        public ServiceAddress ServiceAddress { get; set; }
     }
 }

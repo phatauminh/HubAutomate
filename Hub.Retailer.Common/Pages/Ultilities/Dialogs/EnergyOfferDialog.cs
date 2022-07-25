@@ -1,12 +1,12 @@
 ﻿using Hub.Core.Controls;
 using Hub.Core.Decorators;
-using Hub.Core.Ultilities;
+using Hub.Retailer.Common.Models;
 using Hub.Retailer.Common.Models.Activities;
 using System.Threading.Tasks;
 
-namespace Hub.Retailer.Common.Pages.Ultilities.Popups
+namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
 {
-    public class EnergyOfferPopup : BasePopup
+    public class EnergyOfferDialog : DialogBase
     {
         #region Energy Offer Label
         private const string LblFunctionGroup = "Function Group";
@@ -133,16 +133,19 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Popups
         private const string LblMeteringCoordinatorRP = "Metering Coordinator (RP) ";
         #endregion
 
-       
+
         public override string Title => "Energy Offer - Customer Find / New";
 
         public TextBox CustomerNameTextBox => GetTextBoxByLabel(LblCustomerName);
         public TextBox OfferDocumentNumberTextBox => GetTextBoxByLabel(LblOfferDocumentNumber);
         public TextBox TrackingNumberTextBox => GetTextBoxByLabel(LblTrackingNumber);
+        public TextArea ServiceAddressTextArea => GetTextAreaByLabel(LblServiceAddress);
+
+
 
         public SelectList FunctionGroupSelectList => GetSelectListByLabel(LblFunctionGroup);
 
-        public EnergyOfferPopup(IPageDecorator page) : base(page)
+        public EnergyOfferDialog(IPageDecorator page) : base(page)
         {
         }
 
@@ -157,13 +160,21 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Popups
 
         private async Task InputCustomerFindNew(EnergyOffer model)
         {
-            await FunctionGroupSelectList.Select(model.FunctionGroup);
+            await FunctionGroupSelectList.SetValue(model.FunctionGroup);
         }
 
         private async Task InputDocumentSupplyAddress(EnergyOffer model)
         {
-            await OfferDocumentNumberTextBox.SetText(model.OfferDocumentNumber);
-            await TrackingNumberTextBox.SetText(model.TrackingNumber);
+            await OfferDocumentNumberTextBox.SetValue(model.OfferDocumentNumber);
+            await TrackingNumberTextBox.SetValue(model.TrackingNumber);
+            await SetServiceAddress(model.ServiceAddress);
+        }
+
+        private async Task SetServiceAddress(ServiceAddress address)
+        {
+            await ServiceAddressTextArea.LaunchEditDialog();
+            var dialog = new ServiceAddressDialog(_page);
+            await dialog.SetAddressSearch(address);
         }
     }
 }

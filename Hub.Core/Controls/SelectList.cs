@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Hub.Core.Controls
 {
-    public class SelectList
+    public class SelectList : BaseControl
     {
         #region Seletors
         private readonly string DropdownCornerIconSelector = "//select//parent::div//following-sibling::div";
@@ -18,10 +18,17 @@ namespace Hub.Core.Controls
             _baseLocator = baseLocator;
         }
 
-        public async Task Select(string item)
+        public override async Task<string> GetValue()
+        {
+            //TODO get current value in dropdown
+            return string.Empty;
+        }
+
+
+        public override async Task SetValue(string value)
         {
             await _selectLocator.Locator(DropdownCornerIconSelector).ClickAsync();
-            await _baseLocator.Locator(ListItemSelector).Locator($"text = {item}").ClickAsync();
+            await _baseLocator.Locator(ListItemSelector).Locator($"text = {value}").ClickAsync();
         }
     }
 }
