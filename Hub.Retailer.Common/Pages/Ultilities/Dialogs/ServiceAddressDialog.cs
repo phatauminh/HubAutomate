@@ -14,11 +14,12 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
         private const string LblSuburbPostCode = "Suburb/Postcode";
         private const string LblApplySelectionButton = "Apply Selection";
         private const string LblSearchButton = "Search";
+        private const string LblSelectButton = "Select";
         #endregion
 
         private TextBox StreetTextBox => GetTextBoxByLabel(LblStreet);
         private TextBox SuburbPostCodeTextBox => GetTextBoxByLabel(LblSuburbPostCode);
-        private Table AddressSearchTable  => GetTable(".ui-datatable-scrollable-body");
+        private Table AddressSearchTable => GetTable(".ui-datatable-scrollable-body");
 
         public override string Title => "Edit Address";
 
@@ -26,49 +27,50 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
         {
         }
 
-        public async Task SetAddressSearch(ServiceAddress address)
+        public async Task SelectServiceAddress(ServiceAddress serviceAddress)
         {
-            await StreetTextBox.SetValue(address.StreetName);
-            await SuburbPostCodeTextBox.SetValue(address.Postcode);
+            await StreetTextBox.SetValue(serviceAddress.StreetName);
+            await SuburbPostCodeTextBox.SetValue(serviceAddress.Postcode);
+
             var searchBtn = GetButtonBySpan(LblSearchButton);
             await searchBtn.Click();
-            await SelectServiceAddress();
-        }
 
-        private async Task SelectServiceAddress()
-        {
             var listAddressSearch = await AddressSearchTable.GetAllBody();
 
-            foreach (var item in listAddressSearch)
+            for (int i = 0; i < listAddressSearch.Count; i++)
             {
-                var fullAddress = item.Split("|")[0];
+                var fullAddress = listAddressSearch[i].Split("|");
 
-                if (fullAddress.Split(",").Count(c => c == ",") > 1)
-                    continue;
+                var address = fullAddress[0];
+                var postCode = fullAddress[1];
 
-                var address = fullAddress.Split(",")[0].Replace(fullAddress.Split(",")[0].Split(" ").Last(), "").Trim();
-                var postcode = fullAddress.ToString().Split(" ").Last();
-
-                var serviceAddress = new ServiceAddress()
+                serviceAddress = new ServiceAddress()
                 {
-                    Address = address,
-                    Postcode = postcode
+                    Address = address.Split(",")[0].Replace(address.Split(",")[0].Split(" ").Last(), "").Trim(),
+                    Postcode = postCode
                 };
 
                 var isAddressLinkToCustomer = await QueryHelper.IsAddressLinkedToCustomersInSystem(serviceAddress);
 
                 if (!isAddressLinkToCustomer)
                 {
-                    
+                    var row = await AddressSearchTable.GetRowByIndex(i);
+                    await row.ClickOnRow();
+                    break;
                 }
             }
 
+            var applySelectionBtn = GetButtonBySpan(LblApplySelectionButton);
+            await applySelectionBtn.Click();
+
+            var selectBtn = GetButtonBySpan(LblSelectButton);
+            await selectBtn.Click();
         }
         public async Task SetManualOverride(ServiceAddress address)
         {
 
         }
-   
+
 
     }
 }

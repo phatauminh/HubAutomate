@@ -7,10 +7,10 @@ namespace Hub.Core.Controls
 {
     public class Table
     {
-        public ILocator _tableLocator;
-        public ILocator _headerLocator;
-        public ILocator _bodyLocator;
-        public readonly string NO_RECORDS_FOUND = "No records found.";
+        private readonly ILocator _tableLocator;
+        private readonly ILocator _headerLocator;
+        private readonly ILocator _bodyLocator;
+        private readonly string NO_RECORDS_FOUND = "No records found.";
 
         public Table(ILocator locator)
         {
@@ -56,6 +56,11 @@ namespace Hub.Core.Controls
                 allBody.Add(builder.ToString());
             }
             return allBody;
+        }
+
+        public async Task<Row> GetRowByIndex(int index)
+        {
+            return new Row(_bodyLocator.Nth(index));
         }
     }
 

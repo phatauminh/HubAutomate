@@ -11,4 +11,3 @@ Scenario:  Create and complete Energy Offer then verify new NMI classifications 
 	When I go to activity maintenance
 	And I click Add button and go to activity 'Energy Offer' 'Energy Offer'
 	And I create energy offer
-
