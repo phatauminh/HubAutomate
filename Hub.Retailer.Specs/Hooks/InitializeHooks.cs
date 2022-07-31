@@ -34,7 +34,7 @@ namespace Hub.Retailer.Specs.Hooks
         [AfterScenario()]
         public async Task TearDown()
         {
-            await BrowserContext.CloseAsync();
+            await TerminatePlaywright();
         }
     }
 }

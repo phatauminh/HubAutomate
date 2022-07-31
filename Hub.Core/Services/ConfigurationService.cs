@@ -23,8 +23,7 @@ namespace Hub.Core.Services
             return result;
         }
 
-
-        private static IConfigurationRoot InitializeConfiguration()
+        public static IConfigurationRoot InitializeConfiguration()
         {
             var filesInExecutionDir = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
             var settingsFile = filesInExecutionDir.FirstOrDefault(x => x.Contains("appsettings.json"));

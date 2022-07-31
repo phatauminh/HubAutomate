@@ -1,7 +1,7 @@
 ﻿using System;
 using TechTalk.SpecFlow;
 
-namespace Hub.Retailer.Specs.Ultilities
+namespace Hub.Retailer.Specs.Extensions
 {
     public static class TableExtensions
     {

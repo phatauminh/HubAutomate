@@ -20,8 +20,8 @@ namespace Hub.Retailer.Specs.Features.CatsAndWigs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Energy Offer")]
-    public partial class EnergyOfferFeature
+    [NUnit.Framework.DescriptionAttribute("C&I")]
+    public partial class CIFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -35,7 +35,7 @@ namespace Hub.Retailer.Specs.Features.CatsAndWigs
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/CatsAndWigs", "Energy Offer", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/CatsAndWigs", "C&I", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,16 +74,18 @@ namespace Hub.Retailer.Specs.Features.CatsAndWigs
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("HRP-2194 Create and complete Energy Offer then verify new NMI classifications val" +
-            "ue are added")]
-        [NUnit.Framework.CategoryAttribute("EnergyOffer")]
-        public virtual void HRP_2194CreateAndCompleteEnergyOfferThenVerifyNewNMIClassificationsValueAreAdded()
+        [NUnit.Framework.DescriptionAttribute("Create and complete Energy Offer then verify new NMI classifications value are ad" +
+            "ded")]
+        [NUnit.Framework.CategoryAttribute("CATS&WIGS")]
+        [NUnit.Framework.CategoryAttribute("HRP-2194")]
+        public virtual void CreateAndCompleteEnergyOfferThenVerifyNewNMIClassificationsValueAreAdded()
         {
             string[] tagsOfScenario = new string[] {
-                    "EnergyOffer"};
+                    "CATS&WIGS",
+                    "HRP-2194"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("HRP-2194 Create and complete Energy Offer then verify new NMI classifications val" +
-                    "ue are added", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create and complete Energy Offer then verify new NMI classifications value are ad" +
+                    "ded", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

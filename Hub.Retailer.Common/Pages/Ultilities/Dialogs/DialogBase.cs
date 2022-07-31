@@ -42,12 +42,17 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
             return ElementFinder.FindButtonBySpan(frame, text);
         }
 
+        protected Table GetTable(string divTable)
+        {
+            var frame = _page.FrameLocator(FrameSelector).Locator("body").Locator(divTable);
+            return new Table(frame);
+        }
+
         protected async Task ClickNext()
         {
             var frame = _page.FrameLocator(FrameSelector).Locator("body");
             var controls = new NextButtonControl(frame);
             await controls.Execute();
         }
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using Hub.Core.Decorators;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Hub.Retailer.Common.Pages.Login
 {
@@ -8,7 +7,7 @@ namespace Hub.Retailer.Common.Pages.Login
         private bool isSSO;
 
         string NextButton => "//input[@type='submit' and @value = 'Next']";
-        string UsernameField => isSSO ? "[type='email']" : "id=j_username";
+        string UsernameField => isSSO ? "css=[type='email']" : "id=j_username";
         string PasswordField => isSSO ? "[type='password']" : "id=j_password";
         string SignInButton => isSSO ? "//input[@type='submit' and @value = 'Sign in']" : "id=login";
         string StaySignInButton(bool staySignIn) => staySignIn ? "//input[@type='submit' and @value = 'Yes']" : "//input[@type='button' and @value = 'No']";

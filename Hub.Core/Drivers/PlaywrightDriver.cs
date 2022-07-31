@@ -65,7 +65,12 @@ namespace Hub.Core.Drivers
 
             var page = await BrowserContext.NewPageAsync();
 
-            Page = new PageDecorator(page);
+            Page = new PlaywrightDecorator(page);
+        }
+
+        public async Task TerminatePlaywright()
+        {
+            await BrowserContext.CloseAsync();
         }
     }
 

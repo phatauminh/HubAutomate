@@ -4,7 +4,7 @@ using Hub.Retailer.Common.Models.Activities;
 using Hub.Retailer.Common.Pages.Activities;
 using Hub.Retailer.Common.Pages.Ultilities.Dialogs;
 using Hub.Retailer.Data.Entities;
-using Hub.Retailer.Specs.Ultilities;
+using Hub.Retailer.Specs.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace Hub.Retailer.Specs.Steps
         }
 
         [Given(@"I prepare energy offer data")]
-        public void GivenIPrepareEnergyOfferData(Table table)
+        public async Task GivenIPrepareEnergyOfferData(Table table)
         {
             var serviceAddress = GenerateTASAddress();
             var energyOffer = new EnergyOffer();

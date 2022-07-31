@@ -175,6 +175,7 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
             await ServiceAddressTextArea.LaunchEditDialog();
             var dialog = new ServiceAddressDialog(_page);
             await dialog.SetAddressSearch(address);
+
         }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -14,7 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hub.Retailer.Common\Hub.Retailer.Common.csproj" />
+    <Reference Include="Hub.Retailer.Common">
+      <HintPath>..\Hub.Retailer.Common\bin\Debug\netcoreapp3.1\Hub.Retailer.Common.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>

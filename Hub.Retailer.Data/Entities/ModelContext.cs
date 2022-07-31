@@ -26,6 +26,7 @@ namespace Hub.Retailer.Data.Entities
             }
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EventException>(entity =>

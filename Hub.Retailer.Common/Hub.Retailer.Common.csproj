@@ -23,4 +23,11 @@
     <ProjectReference Include="..\Hub.Core\Hub.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Hub.Retailer.Data">
+      <HintPath>..\Hub.Retailer.Data\bin\Debug\netcoreapp3.1\Hub.Retailer.Data.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
 </Project>

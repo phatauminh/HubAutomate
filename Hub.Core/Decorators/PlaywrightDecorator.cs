@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using ConsoleLogging = System.Console;
 namespace Hub.Core.Decorators
 {
-    public class PageDecorator : IPageDecorator
+    public class PlaywrightDecorator : IPageDecorator
     {
         private readonly IPage Page;
 
-        public PageDecorator(IPage page)
+        public PlaywrightDecorator(IPage page)
         {
             Page = page;
 
@@ -580,7 +580,7 @@ namespace Hub.Core.Decorators
 
         public Task TypeAsync(string selector, string text, PageTypeOptions options = null)
         {
-            throw new NotImplementedException();
+            return Page.TypeAsync(selector, text, options);
         }
 
         public Task UncheckAsync(string selector, PageUncheckOptions options = null)
@@ -625,7 +625,7 @@ namespace Hub.Core.Decorators
 
         public Task WaitForLoadStateAsync(LoadState? state = null, PageWaitForLoadStateOptions options = null)
         {
-            throw new NotImplementedException();
+            return Page.WaitForLoadStateAsync(state, options);
         }
 
         public Task<IResponse> WaitForNavigationAsync(PageWaitForNavigationOptions options = null)
