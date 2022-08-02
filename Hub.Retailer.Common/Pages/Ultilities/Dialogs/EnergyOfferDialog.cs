@@ -1,7 +1,9 @@
 ﻿using Hub.Core.Controls;
 using Hub.Core.Decorators;
+using Hub.Retailer.Common.Extensions;
 using Hub.Retailer.Common.Models;
 using Hub.Retailer.Common.Models.Activities;
+using System;
 using System.Threading.Tasks;
 
 namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
@@ -25,7 +27,7 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
         private const string LblContractVerified = "Contract Verified";
         private const string LblSignedDate = "Signed Date";
         private const string LblAppointmentDate = "Appointment Date";
-        private const string LblEnergyRepresentativeID = "Energy Representative ID";
+        private const string LblEnergyRepresentativeId = "Energy Representative ID";
         private const string LblConnectionType = "Connection Type";
         private const string LblMoveInDate = "Move-In Date";
         private const string LblMoveOutDate = "Move-Out Date";
@@ -136,45 +138,58 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
 
         public override string Title => "Energy Offer - Customer Find / New";
 
+        #region TextBox
         public TextBox CustomerNameTextBox => GetTextBoxByLabel(LblCustomerName);
         public TextBox OfferDocumentNumberTextBox => GetTextBoxByLabel(LblOfferDocumentNumber);
         public TextBox TrackingNumberTextBox => GetTextBoxByLabel(LblTrackingNumber);
+        public TextBox MoveInDateTextBox => GetTextBoxByLabel(LblMoveInDate);
         public TextArea ServiceAddressTextArea => GetTextAreaByLabel(LblServiceAddress);
+        #endregion
 
-
-
+        #region SelectList
         public SelectList FunctionGroupSelectList => GetSelectListByLabel(LblFunctionGroup);
+        public SelectList EnergyRepresentativeIdSelectList => GetSelectListByLabel(LblEnergyRepresentativeId);
+        public SelectList ConnectionTypeSelectList => GetSelectListByLabel(LblConnectionType);
+        #endregion
 
         public EnergyOfferDialog(IPageDecorator page) : base(page)
         {
         }
 
-        public async Task Create(EnergyOffer model)
+        public async Task Create(EnergyOfferWizard model)
         {
             await InputCustomerFindNew(model);
             await ClickNext();
             await InputDocumentSupplyAddress(model);
             await ClickNext();
+            await InputCurrentOccupantDetails(model);
+            await ClickNext();
         }
 
 
-        private async Task InputCustomerFindNew(EnergyOffer model)
+        private async Task InputCustomerFindNew(EnergyOfferWizard model)
         {
             await FunctionGroupSelectList.SetValue(model.FunctionGroup);
         }
 
-        private async Task InputDocumentSupplyAddress(EnergyOffer model)
+        private async Task InputDocumentSupplyAddress(EnergyOfferWizard model)
         {
             await OfferDocumentNumberTextBox.SetValue(model.OfferDocumentNumber);
             await TrackingNumberTextBox.SetValue(model.TrackingNumber);
             await SetServiceAddress(model.ServiceAddress);
         }
 
-        private async Task SetServiceAddress(ServiceAddress address)
+        private async Task InputCurrentOccupantDetails(EnergyOfferWizard model)
+        {
+            await EnergyRepresentativeIdSelectList.SetValue(model.EnergyRepresentativeId);
+            await ConnectionTypeSelectList.SetValue(model.ConnectionType);
+        }
+
+        private async Task SetServiceAddress(ServiceAddress model)
         {
             await ServiceAddressTextArea.LaunchEditDialog();
             var dialog = new ServiceAddressDialog(_page);
-            await dialog.SelectServiceAddress(address);
+            await dialog.SelectServiceAddress(model);
 
         }
     }

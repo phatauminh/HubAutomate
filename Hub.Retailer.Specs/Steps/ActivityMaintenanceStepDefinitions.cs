@@ -1,4 +1,6 @@
 ﻿using Hub.Core.Decorators;
+using Hub.Retailer.Common.Enums;
+using Hub.Retailer.Common.Extensions;
 using Hub.Retailer.Common.Models;
 using Hub.Retailer.Common.Models.Activities;
 using Hub.Retailer.Common.Pages.Activities;
@@ -27,23 +29,67 @@ namespace Hub.Retailer.Specs.Steps
             _pageObject = login;
             _modelContext = modelContext;
             _modelManagement = modelManagement;
+
         }
 
-        [Given(@"I prepare energy offer data")]
-        public async Task GivenIPrepareEnergyOfferData(Table table)
+        [Given(@"I initialize energy offer")]
+        public void GivenIInitializeEnergyOffer()
         {
-            var serviceAddress = GenerateTASAddress();
-            var energyOffer = new EnergyOffer();
-
-            table.ToModel(energyOffer);
-            _modelManagement.EnergyOffer = energyOffer;
-            _modelManagement.EnergyOffer.ServiceAddress = new ServiceAddress
-            {
-                StreetName = serviceAddress.Item1,
-                Postcode = serviceAddress.Item2
-            };
+            _modelManagement.EnergyOffer = new EnergyOfferWizard();
+            _modelManagement.EnergyOffer.ServiceAddress = new ServiceAddress();
         }
 
+        [Given(@"I have address for state '(.*)'")]
+        public void GivenIHaveAdressForState(string state)
+        {
+            if (state == "TAS")
+            {
+                var serviceAddress = GenerateTASAddress();
+
+                _modelManagement.EnergyOffer.ServiceAddress.StreetName = serviceAddress.Item1;
+                _modelManagement.EnergyOffer.ServiceAddress.Postcode = serviceAddress.Item2;
+            }
+
+            _modelManagement.EnergyOffer.ServiceAddress.State = state;
+        }
+
+        [Given(@"I have offer code '(.*)'")]
+        public void GivenIHaveOfferCode(string offerCode)
+        {
+            _modelManagement.EnergyOffer.OfferCode = offerCode;
+        }
+
+        [Given(@"I have function group '(.*)'")]
+        public void GivenIHaveFunctionGroup(string functionGroup)
+        {
+            _modelManagement.EnergyOffer.FunctionGroup = functionGroup;
+        }
+
+        [Given(@"I have tariff '(.*)'")]
+        public void GivenIHaveTariff(string tariff)
+        {
+            _modelManagement.EnergyOffer.Tariff = tariff;
+        }
+
+        [Given(@"I have utility type '(.*)'")]
+        public void GivenIHaveUtilityType(string utilType)
+        {
+            var utilTypEnum = EnumExtensions.GetEnumValueFromDescription<UtilityTypeEnum>(utilType);
+            _modelManagement.EnergyOffer.UtilityType = utilTypEnum;
+        }
+
+        [Given(@"I have customer type '(.*)'")]
+        public void GivenIHaveCustomerType(string customerType)
+        {
+            var customerTypeEnum = EnumExtensions.GetEnumValueFromDescription<CustomerTypeEnum>(customerType);
+            _modelManagement.EnergyOffer.CustomerType = customerTypeEnum;
+        }
+
+        [Given(@"I have meter type '(.*)'")]
+        public void GivenIHaveMeterType(string meterType)
+        {
+            _modelManagement.EnergyOffer.MeterType = meterType;
+        }
 
         [When(@"I go to activity maintenance")]
         public async Task WhenIGoToActivityMaintenance()
@@ -61,7 +107,14 @@ namespace Hub.Retailer.Specs.Steps
         public async Task WhenICreateEnergyOffer()
         {
             var popup = new EnergyOfferDialog(_page);
-            await popup.Create(_modelManagement.EnergyOffer);
+            var decoratedEOWizard = DecorateEOWizardSamples(_modelManagement.EnergyOffer);
+
+            await popup.Create(decoratedEOWizard);
+        }
+
+        private EnergyOfferWizard DecorateEOWizardSamples(EnergyOfferWizard energyOfferWizard)
+        {
+            return energyOfferWizard.DecorateSampleData();
         }
 
         //Work around

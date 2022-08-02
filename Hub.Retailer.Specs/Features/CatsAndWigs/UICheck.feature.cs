@@ -78,12 +78,25 @@ namespace Hub.Retailer.Specs.Features.CatsAndWigs
             "ded")]
         [NUnit.Framework.CategoryAttribute("CATS&WIGS")]
         [NUnit.Framework.CategoryAttribute("HRP-2194")]
-        public virtual void CreateAndCompleteEnergyOfferThenVerifyNewNMIClassificationsValueAreAdded()
+        [NUnit.Framework.TestCaseAttribute("Electricity", "Interval", "TAS61", "Residential", "TAS", "Inbound Telesales - In-Situ", null)]
+        [NUnit.Framework.TestCaseAttribute("Electricity", "Basic", "TAS22", "Residential", "TAS", "Inbound Telesales - In-Situ", null)]
+        public virtual void CreateAndCompleteEnergyOfferThenVerifyNewNMIClassificationsValueAreAdded(string utilityType, string meterType, string tariff, string customerType, string state, string functionGroup, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "CATS&WIGS",
                     "HRP-2194"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("UtilityType", utilityType);
+            argumentsOfScenario.Add("MeterType", meterType);
+            argumentsOfScenario.Add("Tariff", tariff);
+            argumentsOfScenario.Add("CustomerType", customerType);
+            argumentsOfScenario.Add("State", state);
+            argumentsOfScenario.Add("FunctionGroup", functionGroup);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create and complete Energy Offer then verify new NMI classifications value are ad" +
                     "ded", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 4
@@ -107,30 +120,39 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 5
- testRunner.Given("I login to user portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I initialize energy offer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Key",
-                            "Value"});
-                table1.AddRow(new string[] {
-                            "FunctionGroup",
-                            "Inbound Telesales - In-Situ"});
-                table1.AddRow(new string[] {
-                            "OfferDocumentNumber",
-                            "TR"});
-                table1.AddRow(new string[] {
-                            "TrackingNumber",
-                            "TR_TEST"});
 #line 6
- testRunner.And("I prepare energy offer data", ((string)(null)), table1, "And ");
+ testRunner.And(string.Format("I have utility type \'{0}\'", utilityType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 7
+ testRunner.And("I have meter type \'{MeterType}\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 8
+ testRunner.And(string.Format("I have tariff \'{0}\'", tariff), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 9
+ testRunner.And("I have customer type \'{CustomerType}\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 10
+ testRunner.And(string.Format("I have address for state \'{0}\'", state), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 11
- testRunner.When("I go to activity maintenance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And(string.Format("I have function group \'{0}\'", functionGroup), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 12
- testRunner.And("I click Add button and go to activity \'Energy Offer\' \'Energy Offer\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I have offer code \'ERST010\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 13
+ testRunner.And("I login to user portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 14
+ testRunner.When("I go to activity maintenance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 15
+ testRunner.And("I click Add button and go to activity \'Energy Offer\' \'Energy Offer\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 16
  testRunner.And("I create energy offer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

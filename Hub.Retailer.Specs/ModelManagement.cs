@@ -4,6 +4,6 @@ namespace Hub.Retailer.Specs
 {
     public class ModelManagement
     {
-        public EnergyOffer EnergyOffer { get;set; }
+        public EnergyOfferWizard EnergyOffer { get;set; }
     }
 }

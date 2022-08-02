@@ -27,10 +27,10 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
         {
         }
 
-        public async Task SelectServiceAddress(ServiceAddress serviceAddress)
+        public async Task SelectServiceAddress(ServiceAddress model)
         {
-            await StreetTextBox.SetValue(serviceAddress.StreetName);
-            await SuburbPostCodeTextBox.SetValue(serviceAddress.Postcode);
+            await StreetTextBox.SetValue(model.StreetName);
+            await SuburbPostCodeTextBox.SetValue(model.Postcode);
 
             var searchBtn = GetButtonBySpan(LblSearchButton);
             await searchBtn.Click();
@@ -44,7 +44,7 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
                 var address = fullAddress[0];
                 var postCode = fullAddress[1];
 
-                serviceAddress = new ServiceAddress()
+                var serviceAddress = new ServiceAddress()
                 {
                     Address = address.Split(",")[0].Replace(address.Split(",")[0].Split(" ").Last(), "").Trim(),
                     Postcode = postCode
@@ -54,7 +54,7 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
 
                 if (!isAddressLinkToCustomer)
                 {
-                    var row = await AddressSearchTable.GetRowByIndex(i);
+                    var row = AddressSearchTable.GetRowByIndex(i);
                     await row.ClickOnRow();
                     break;
                 }

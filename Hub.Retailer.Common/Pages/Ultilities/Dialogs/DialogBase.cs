@@ -50,7 +50,7 @@ namespace Hub.Retailer.Common.Pages.Ultilities.Dialogs
 
         protected async Task ClickNext()
         {
-            var frame = _page.FrameLocator(FrameSelector).Locator("body");
+            var frame = _page.FrameLocator(FrameSelector).Locator("body").Locator("id=buttonDiv");
             var controls = new NextButtonControl(frame);
             await controls.Execute();
         }

@@ -58,7 +58,7 @@ namespace Hub.Core.Controls
             return allBody;
         }
 
-        public async Task<Row> GetRowByIndex(int index)
+        public Row GetRowByIndex(int index)
         {
             return new Row(_bodyLocator.Nth(index));
         }
