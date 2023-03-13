@@ -19,14 +19,16 @@ namespace Hub.Retailer.Common.Extensions
             var state = energyOfferWizard.ServiceAddress.State;
             var customerType = energyOfferWizard.CustomerType;
 
-            var stateCode = StringExtensions.GetStateCodeBy(stateName: state);
+            var stateCode =  state.GetStateCodeBy();
             var offerDocumentNumber = $"{state.First()}{customerType.ToString().First()}";
 
             energyOfferWizard.OfferDocumentNumber = offerDocumentNumber;
+            energyOfferWizard.TrackingNumber = StringExtensions.GenerateStringWithPrefix(15, $"AUTO-");
             energyOfferWizard.ConnectionType = connectionType;
-
+            energyOfferWizard.EnergyRepresentativeId = "Web Sale";
 
             return energyOfferWizard;
         }
+
     }
 }

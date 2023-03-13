@@ -1,5 +1,8 @@
 ﻿using Hub.Retailer.Common.Extensions;
+using Hub.Retailer.Common.Helpers;
 using Hub.Retailer.Common.Models;
+using Hub.Retailer.Data.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hub.Retailer.Data.Services
@@ -25,6 +28,30 @@ namespace Hub.Retailer.Data.Services
             });
 
             return custNum.IsNotNullOrEmpty();
+        }
+
+        public static List<NMIEntity> Generate_List_NMI(string state, int numberOfNMI)
+        {
+            var scriptPath = @".\Scripts\GenerateNMI.sql";
+
+            var nmi = MiscHelper.Get_Valid_NMI_By_State(state, numberOfNMI);
+
+            var param = $"'{nmi}' '{numberOfNMI}'";
+            string output = OracleDataAccess.ExecuteWithOutput(scriptPath, param);
+
+            var listNMIAndCheckSum = output.Substring(output.IndexOf($"{nmi} ")).Split("\r\n\r\n")[0].Replace("\r\n", " ").Split(' ');
+            var listNMIEntity = new List<NMIEntity>();
+
+            for (int i = 0; i < listNMIAndCheckSum.Length; i++)
+            {
+                listNMIEntity.Add(new NMIEntity
+                {
+                    NMI = listNMIAndCheckSum[i],
+                    Checksum = listNMIAndCheckSum[++i]
+                }); ;
+            }
+
+            return listNMIEntity;
         }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Hub.Retailer.Data.Services
@@ -111,6 +112,34 @@ namespace Hub.Retailer.Data.Services
                 conn.Open();
                 dataReaderHandler(await cmd.ExecuteReaderAsync());
             }
+        }
+
+        public static string ExecuteWithOutput(string scriptPath, string param)
+        {
+
+            var dataSource = RetailerConfiguration.DatabaseSettings.ConnectionString.Split(';')[0].Replace("Data Source=", "");
+            var userName = RetailerConfiguration.DatabaseSettings.ConnectionString.Split(';')[1].Replace("User Id=", "");
+            var password = RetailerConfiguration.DatabaseSettings.ConnectionString.Split(';')[2].Replace("Password=", "");
+
+            var DbConnectString = string.Format("\"{0}/{1}@{2}\"", userName, password, dataSource);
+
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo("sqlplus.exe")
+                {
+                    Arguments =
+                        string.Format("{0} @\"{1}\" {2}", DbConnectString, scriptPath, param),
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                }
+            };
+
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            process.Close();
+            process.Dispose();
+            return output;
         }
 
         private static OracleConnection GetConnection()

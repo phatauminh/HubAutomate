@@ -1,4 +1,7 @@
-﻿namespace Hub.Retailer.Common.Extensions
+﻿using System;
+using System.Linq;
+
+namespace Hub.Retailer.Common.Extensions
 {
     public static class StringExtensions
     {
@@ -12,7 +15,14 @@
             return string.IsNullOrEmpty(value);
         }
 
-        public static int GetStateCodeBy(string stateName)
+        public static string GenerateStringWithPrefix(int length, string prefix)
+        {
+            const string chars = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZx0123456789";
+            var random = new Random();
+            return prefix + new string(Enumerable.Repeat(chars, length - prefix.Length).Select(s => s[random.Next(1, s.Length)]).ToArray());
+        }
+
+        public static int GetStateCodeBy(this string stateName)
         {
             switch (stateName)
             {

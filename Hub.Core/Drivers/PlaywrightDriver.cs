@@ -58,6 +58,11 @@ namespace Hub.Core.Drivers
                 options = new BrowserNewContextOptions
                 {
                     RecordVideoDir = Configuration.PlaywrightSettings.RecordSettings.StoredDirectory,
+                    RecordVideoSize = new RecordVideoSize
+                    {
+                        Height= 1080,
+                        Width = 1920
+                    }
                 };
             }
 
